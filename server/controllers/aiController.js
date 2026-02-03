@@ -222,7 +222,63 @@ export const resumeReview = async (req, res) => {
     const dataBuffer = fs.readFileSync(resume.path);
     const pdfData = await pdf(dataBuffer);
 
-    const prompt = `Review the following resume and provide constructive feedback on its strengths, weaknesses, and areas for improvement. Resume Content:\n\n${pdfData.text}`;
+    const prompt = `You are an expert ATS Resume Analyzer and Senior Technical Recruiter.
+
+First, calculate an ATS compatibility score (0–100) for the resume based on:
+
+Keyword optimization
+
+Skills relevance
+
+Formatting & structure
+
+Role alignment
+
+Readability for Applicant Tracking Systems
+
+Clearly mention the ATS Score at the very beginning with a short explanation of what the score means.
+
+Then, thoroughly review the resume and provide constructive, detailed feedback in the following sections:
+
+Strengths
+
+What the resume does well
+
+Strong sections, skills, or achievements
+
+Weaknesses
+
+Missing information
+
+Vague descriptions
+
+ATS or recruiter red flags
+
+Areas for Improvement
+
+Specific, actionable suggestions
+
+How to improve clarity, impact, and ATS ranking
+
+ATS Optimization Suggestions
+
+Keywords to add or improve
+
+Formatting fixes (headings, bullet points, consistency)
+
+Section improvements for better parsing
+
+Content Enhancement Tips
+
+How to rewrite bullet points using metrics and impact
+
+Suggestions to better highlight projects, skills, and experience
+
+Keep the feedback clear, professional, and beginner-friendly.
+Avoid unnecessary fluff and focus on real-world hiring and ATS standards.
+
+Resume Content:
+${pdfData.text}`;
 
     const response = await AI.chat.completions.create({
       model: "gemini-3-flash-preview",
