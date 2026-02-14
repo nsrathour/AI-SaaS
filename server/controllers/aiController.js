@@ -228,7 +228,7 @@ export const resumeReview = async (req, res) => {
       model: "gemini-3-flash-preview",
       messages: [{ role: "user", content: prompt }],
       temperature: 0.7,
-      max_tokens: 1000,
+      max_tokens: 2000,
     });
 
     const content = response.choices[0].message.content;
