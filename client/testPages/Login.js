@@ -17,11 +17,11 @@ async enterPassword(password){
 }
 
 async login(email , password){
-    await this.getStartedBtn.click()      // opens Clerk login modal
+    await this.getStartedBtn.click() 
     await this.enterEmail(email)
-    await this.continueBtn.click()        // step 1: submit email
+    await this.continueBtn.click()
     await this.enterPassword(password)
-    await this.continueBtn.click()        // step 2: submit password
+    await this.continueBtn.click()
 }
 
 async dashboardBtn(){

@@ -19,4 +19,10 @@ test.describe('Login tests', () => {
         
         await expect(page).not.toHaveURL('https://quick-ai-eight-nu.vercel.app/ai')
     })
+    test('empty password' , async({ page }) => {
+        const loginPage = new LoginPage(page)
+        await loginPage.login('test@example.com', '')
+        await expect(page.locator('.cl-formFieldErrorText')).toBeVisible()
+        await expect(page).not.toHaveURL('https://quick-ai-eight-nu.vercel.app/ai')
+    })
 })
